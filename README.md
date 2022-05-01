@@ -1,24 +1,78 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type     | Options                   |
+| ------------------ | -------- | ------------------------- |
+| email              | string   | null: false ,unique: true |
+| encrypted_password | string   | null: false               |
+| nickname           | string   | null: false               |
+| birthday           | date     | null: false               | 
+| family_name        | string   | null: false               |
+| first_name         | string   | null: false               |
+| family_name_kana   | string   | null: false               |
+| first_name_kana    | string   | null: false               |
 
-* Ruby version
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :posts
+- has_many :comments
+- has_one :calorie
 
-* Database creation
+## posts テーブル
 
-* Database initialization
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| title         | string     | null: false                    |
+| text          | text       | null: false                    |
+| user          | references | null: false, foreign_key: true |
+| target_date   | integer    | null: false                    |
+| genre_id      | integer    | null: false                    |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- has_one :calorie
+- belongs_to :user
+- belongs_to :category
+- has_many :comments
 
-* ...
+
+
+## comments テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| text          | text       | null: false                    |
+| post_id       | references | null: false, foreign_key: true |
+| user_id       | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :post
+- belongs_to :user
+
+## categories テーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| genre          | references | null: false, foreign_key: true |
+
+
+### Association
+
+- has_many :posts
+
+
+## calories テーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| kcal           | integer    | null: false                    |
+
+
+### Association
+
+- belongs_to :post
+- belongs_to :user
