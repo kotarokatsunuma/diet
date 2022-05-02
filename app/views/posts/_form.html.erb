@@ -1,0 +1,32 @@
+<%= form_with model: post, local: true do |f|%>
+  <div class="field">
+    <%= f.label :title, "目標のタイトル" %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :text, "目標の詳細" %><br />
+    <%= f.text_area :text, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :genre_id, "カテゴリー" %><br />
+    <%= f.text_area :genre_id, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :target_date, "達成目標日" %><br />
+    <%= f.text_area :target_date, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :concept, "現在の体重" %><br />
+    <%= f.text_area :concept, class: :form__text %>
+  </div>
+
+  
+
+  <div class="actions">
+    <%= f.submit "保存する", class: :form__btn  %>
+  </div>
+<% end %>
